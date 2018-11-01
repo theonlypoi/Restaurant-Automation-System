@@ -28,7 +28,7 @@
     <div fxFlex="5">
     </div>
     <div fxFlex="20">
-        <div fxFlex>
+        <div fxFlex class="scroll" [style.height]="height_of_div + 'px'">
             <h3> Your Cart </h3>
             <hr>
             <mat-list *ngFor="let dish of shoppingCart;let i = index">
@@ -38,7 +38,7 @@
                 <mat-divider></mat-divider>
             </mat-list>
         </div>
-    </div>
+    </div>     
 </div>
 <div [hidden]="dishes">
     <mat-spinner> </mat-spinner>

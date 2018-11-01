@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   shoppingCart: Dish[];
   onDish: boolean[];
   qty: number[];
+  height_of_div: number;
 
   constructor(private dishService:DishService) { 
     this.shoppingCart = [];
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
                       for(let i = 0; i < this.dishes.length;i++) {
                         this.onDish.push(false);
                       }
+                      this.height_of_div = 200*(this.dishes.length/4);
                     });
   }
 

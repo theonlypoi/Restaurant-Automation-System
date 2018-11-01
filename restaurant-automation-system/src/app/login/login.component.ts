@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginData: Login;
-
+  
   constructor(private dialogRef: MatDialogRef<LoginComponent>,
               private fb:FormBuilder) { }
 

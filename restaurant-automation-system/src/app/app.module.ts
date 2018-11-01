@@ -50,6 +50,7 @@ import { LoginComponent } from './login/login.component';
     MatDialogModule,
     MatIconModule
   ],
+  exports:[],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
