@@ -1,0 +1,45 @@
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+     fxLayoutAlign.gt-md = "center" fxLayoutGap = "10px" fxLayoutGap.xs = "0" *ngIf = "dishes">
+
+    <div fxFlex="70">
+        <div fxLayout="column">
+            <div fxFlex *ngIf="dishes" >
+                <mat-grid-list cols="4" rowHeight="200px">
+                    <!-- This will be considered as one piece of content to be laid out by flex layout -->
+                    <mat-grid-tile *ngFor = "let dish of dishes;let i = index" 
+                                    (mouseenter)="onHover(i)"
+                                    (mouseleave)="onHover(i)">                                     
+                        <mat-grid-tile-header *ngIf="onDish[i]">
+                            <button mat-button> <i class="material-icons">edit</i></button>
+                            <button mat-button (click)="addToCart(i)"> <i class="material-icons">add_shopping_cart</i></button>
+                        </mat-grid-tile-header>
+                        <!-- ngFor is a structural directive and helps to iterate over a list of items -->
+                        <img height="200px" src="{{ dish.image }}" alt="{{dish.name}}"> 
+                        <mat-grid-tile-footer>
+                            <h3 matLine> {{dish.name | uppercase}} </h3>
+                            <h5 matLine> {{ dish.price | currency:'&#8377;' }} </h5>
+        <!--                <p matLine> <span> {{dish.description}}</span></p>-->
+                        </mat-grid-tile-footer>            
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </div>
+    <div fxFlex="5">
+    </div>
+    <div fxFlex="20">
+        <div fxFlex>
+            <h3> Your Cart </h3>
+            <hr>
+            <mat-list *ngFor="let dish of shoppingCart;let i = index">
+                {{ dish.name }}  <p> Price: {{ dish.price * qty[i] | currency: '&#8377;'}} </p>
+               <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity"> 
+               <span><button mat-button (click)="removeFromCart(i)"> <i class="material-icons"> remove_shopping_cart</i></button></span>
+                <mat-divider></mat-divider>
+            </mat-list>
+        </div>
+    </div>
+</div>
+<div [hidden]="dishes">
+    <mat-spinner> </mat-spinner>
+</div>

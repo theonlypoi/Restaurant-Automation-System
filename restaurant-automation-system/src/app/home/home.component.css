@@ -1,0 +1,19 @@
+.jumbotron {
+    margin: 5px 10px;
+    padding: 20px 0px;
+    min-height: 150px;
+}
+
+.mat-card-wrapper {
+    position: relative;
+    width: 40%;
+  }
+
+  .jumbotext {
+    position: absolute;
+    top: 30%;
+    right: 65%;
+    color: rgb(156, 40, 112);
+    font-size: 34px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+  }
