@@ -11,6 +11,7 @@
     // For Everybody 
     router.get('/getDishDetails',common.getDishDetails);
     router.get('/getDishDetails/:category',common.getCategorizedDishDetails);
+    router.get('/getCategories',common.getCategories);
     
     // For Managers 
     router.post('/manager/addNewDish',manager.addNewDish);

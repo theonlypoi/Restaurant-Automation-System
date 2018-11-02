@@ -14,6 +14,9 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
+import { MatSelectModule } from '@angular/material/select';
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -23,6 +26,9 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginComponent } from './login/login.component';
 
+import { baseUrl } from './models/baseurl';
+import { DishaddComponent } from './dishadd/dishadd.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +36,8 @@ import { LoginComponent } from './login/login.component';
     FooterComponent,
     HomeComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    DishaddComponent
   ],
   imports: [
     BrowserModule,
@@ -48,11 +55,18 @@ import { LoginComponent } from './login/login.component';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule,
+    MatSelectModule
   ],
   exports:[],
-  providers: [],
+  providers: [
+    { provide: 'baseUrl',useValue: baseUrl}
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: [
+    LoginComponent,
+    DishaddComponent
+  ]
 })
 export class AppModule { }

@@ -2,17 +2,22 @@
   <span> <img src="../../../images/logo.jpg" 
               alt="logo" width="60px" height="60px"></span>
   <button mat-button [routerLink]="['/home']"> <i class="material-icons"> home </i> Home </button>
-  <button mat-button [routerLink]="['/menu']"> <i class="material-icons"> menu </i> Menu </button>
+  <button mat-button [matMenuTriggerFor]="manager_menu">
+      <i class="material-icons"> menu </i> Menu</button>
+  <mat-menu #manager_menu="matMenu">
+    <button mat-menu-item [routerLink]="['/menu']"> Dish Menu </button>
+    <button mat-menu-item *ngIf="isAdmin()" (click)="openDishAddForm()"> Add new Dish </button>
+  </mat-menu>
   <button mat-button> <i class="material-icons"> contacts </i>Contact </button>
   <button mat-button> <i class="material-icons"> supervisor_account </i>About Us</button>
   <button mat-button [matMenuTriggerFor]="sclerk_menu" *ngIf="isAdmin() || isSalesClerk()">
     <i class="material-icons"> assessment </i> Inventory Management</button>
-  <mat-menu #sclerk_menu="matMenu"> 
-    <button mat-menu-item> Stock Detail </button>
-    <button mat-menu-item> Order Ingredient </button>
-    <button mat-menu-item> Generate Bill </button>
-    <button mat-menu-item> Item Sale </button>
-  </mat-menu>
+    <mat-menu #sclerk_menu="matMenu"> 
+      <button mat-menu-item> Stock Detail </button>
+      <button mat-menu-item> Order Ingredient </button>
+      <button mat-menu-item> Generate Bill </button>
+      <button mat-menu-item> Item Sale </button>
+    </mat-menu>
   <a mat-button *ngIf="isAdmin()"> <i class="material-icons"> receipt </i>Reports </a>
   <span class="flex-spacer"></span>
   <button mat-button (click)="openLoginForm()"> <i class="material-icons"> exit_to_app </i> Login </button>

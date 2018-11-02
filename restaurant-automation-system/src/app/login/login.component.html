@@ -3,22 +3,22 @@
   <button mat-button mat-dialog-close> &times; </button> 
 </mat-toolbar>
 
-<form novalidate>
+<form novalidate [formGroup]="loginForm" #lform="ngForm">
   <mat-dialog-content>
     <p> 
       <mat-form-field>
-        <input matInput type="text" placeholder="username" required>
+        <input matInput type="text" placeholder="username" required formControlName="username">
         <mat-icon matPrefix>person</mat-icon>
       </mat-form-field>
       <mat-form-field>
-        <input matInput type="text" placeholder="password" required>
+        <input matInput type="text" placeholder="password" required formControlName="password">
         <mat-icon matPrefix>lock_open</mat-icon>
       </mat-form-field>
     </p>
   </mat-dialog-content>
   <mat-dialog-actions>
     <!-- <span class="flex-spacer"></span> -->
-    <button mat-raised-button color="primary" class="spacer"> Login </button>
+    <button mat-raised-button color="primary" class="spacer" (click)="onSubmit()"> Login </button>
     <button mat-raised-button mat-dialog-close color="warn" class="spacer"> Cancel </button>
   </mat-dialog-actions>
 </form>

@@ -33,13 +33,16 @@
             <hr>
             <mat-list *ngFor="let dish of shoppingCart;let i = index">
                 {{ dish.name }}  <p> Price: {{ dish.price * qty[i] | currency: '&#8377;'}} </p>
-               <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity"> 
+               <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity" style="width:50%"> 
                <span><button mat-button (click)="removeFromCart(i)"> <i class="material-icons"> remove_shopping_cart</i></button></span>
                 <mat-divider></mat-divider>
             </mat-list>
         </div>
     </div>     
 </div>
-<div [hidden]="dishes">
+<div [hidden]="dishes || error">
     <mat-spinner> </mat-spinner>
+</div>
+<div *ngIf="error">
+    <p> {{ this.error }}</p>
 </div>

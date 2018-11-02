@@ -68,4 +68,14 @@
                })
                .catch(err => { return next(err);})
     }
+
+    exports.getCategories = function(req,res,next) {
+        let query = "select * from getCategories()";
+        
+        dbConnection(query) 
+               .then(result => {
+                   res.status(200).json(result.rows);
+               })
+               .catch(err => { return next(err);})
+    }
 })();
