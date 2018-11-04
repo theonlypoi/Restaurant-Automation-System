@@ -4,34 +4,34 @@
   <button mat-button mat-dialog-close> &times;</button>
 </mat-toolbar>
 
-<form novalidate>
+<form novalidate [formGroup]="dishForm" #dform="ngForm">
   <mat-dialog-content>
     <p>
       <mat-form-field> 
-        <input matInput type="text" placeholder="dish name" required>
+        <input matInput type="text" placeholder="dish name" required formControlName="name">
       </mat-form-field>
       <mat-form-field> 
-        <mat-select placeholder="Category" [(value)]="categoryid" required> 
+        <mat-select placeholder="Category" required formControlName="category"> 
           <mat-option> None </mat-option>
-          <mat-option *ngFor="let category of categories" value="{{ category.categoryid }}">
-            {{ category.categoryname }}
+          <mat-option *ngFor="let catg of categories" value="{{ catg.categoryid }}">
+            {{ catg.categoryname }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field> 
-        <input matInput type="number" placeholder="dish price" required>
+        <input matInput type="number" placeholder="dish price" min="10" required formControlName="price">
       </mat-form-field>
       <mat-form-field> 
-        <input matInput type="text" placeholder="image url for the dish" required>
+        <input matInput type="text" placeholder="image url for the dish" required formControlName="image">
         <mat-hint>images/image_name</mat-hint>
       </mat-form-field>
       <mat-form-field>
-        <textarea rows="5" matInput placeholder="Description of the dish" required> </textarea>
+        <textarea rows="3" matInput placeholder="Description of the dish" required formControlName="description"> </textarea>
       </mat-form-field>
     </p>
   </mat-dialog-content>
   <mat-dialog-actions>
-      <button mat-raised-button color="primary" class="spacer" (click)="onSubmit()"> Add Dish </button>
+      <button mat-raised-button color="primary" class="spacer" (click)="addNewDish()" [disabled]="dishForm.invalid"> Add Dish </button>
       <button mat-raised-button mat-dialog-close color="warn" class="spacer"> Cancel </button>
   </mat-dialog-actions> 
 </form>

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { DishService } from '../services/dish.service';
 import { Dish } from '../models/dish';
+import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-dishadd',
@@ -9,16 +11,23 @@ import { Dish } from '../models/dish';
 })
 export class DishaddComponent implements OnInit {
 
+  dish: Dish;
   categories: any;
   error: any;
   categoryid: number;
+  dishForm: FormGroup;
+  dishAdd: boolean;
 
-  constructor(private dishService:DishService) { 
+  @ViewChild('dform') dishAddFormDirective;
+   //TODO: Angular Form Validation 
+
+  constructor(private dishService:DishService,private fb:FormBuilder,
+              public dialogRef:MatDialogRef<DishaddComponent>) { 
+    this.createDishItemForm();
     this.getCategories();
   }
 
   ngOnInit() {
-    
   }
   getCategories() {
     this.dishService.getCategories()
@@ -30,7 +39,24 @@ export class DishaddComponent implements OnInit {
                     });
   }
 
+  createDishItemForm() {
+    this.dishForm = this.fb.group({
+      id: [''],
+      name: ['',[Validators.required]],
+      category:['',[Validators.required]],
+      price: ['',[Validators.required,Validators.min(10)]],
+      image: ['',[Validators.required]],
+      description: ['',[Validators.required,Validators.minLength(20),Validators.maxLength(200)]]
+    });
+  }
+
   addNewDish() {
-    
+    this.dish = this.dishForm.value;
+    this.dishService.addNewDish(this.dish)
+                    .subscribe(data => { 
+                      console.log(data); 
+                      this.dishService.sendAddNotification();
+                      this.dialogRef.close();
+                    });
   }
 }

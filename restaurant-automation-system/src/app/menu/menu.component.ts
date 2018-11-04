@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DishService } from '../services/dish.service';
 import { Dish } from '../models/dish';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -15,21 +16,31 @@ export class MenuComponent implements OnInit {
   qty: number[];
   height_of_div: number;
   error: any;
+  subscription: Subscription;
 
   constructor(private dishService:DishService) { 
     this.shoppingCart = [];
     this.onDish = [];
     this.qty = [];
+
+    this.dishService.getNotification()
+                    .subscribe(result=> {
+                      this.getDishDetails();
+                    });
   }
 
   ngOnInit() {
+    this.getDishDetails();
+  }
+
+  getDishDetails() {
     this.dishService.getDishDetails()
                     .subscribe(dishes => {
                       this.dishes = dishes;
                       for(let i = 0; i < this.dishes.length;i++) {
                         this.onDish.push(false);
                       }
-                      this.height_of_div = 200*(this.dishes.length/4);
+                      this.height_of_div = 200*((this.dishes.length/4) + 1);
                     },
                     error => {
                       this.error = error;
