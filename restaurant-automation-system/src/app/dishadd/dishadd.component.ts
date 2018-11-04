@@ -3,6 +3,7 @@ import { DishService } from '../services/dish.service';
 import { Dish } from '../models/dish';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
+import { RefreshService } from '../services/refresh.service';
 
 @Component({
   selector: 'app-dishadd',
@@ -22,7 +23,8 @@ export class DishaddComponent implements OnInit {
    //TODO: Angular Form Validation 
 
   constructor(private dishService:DishService,private fb:FormBuilder,
-              public dialogRef:MatDialogRef<DishaddComponent>) { 
+              public dialogRef:MatDialogRef<DishaddComponent>,
+              private refresh: RefreshService) { 
     this.createDishItemForm();
     this.getCategories();
   }
@@ -55,7 +57,7 @@ export class DishaddComponent implements OnInit {
     this.dishService.addNewDish(this.dish)
                     .subscribe(data => { 
                       console.log(data); 
-                      this.dishService.sendNotification();
+                      this.refresh.sendNotification();
                       this.dialogRef.close();
                     });
   }

@@ -26,6 +26,7 @@
      };
 
      exports.changeDishPrice = function(req,res,next) {
+        console.log(req.body); 
         let query = "select * from changeDishPrice($1,$2)";
         let params = [req.body.itemid,req.body.price];
 

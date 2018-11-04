@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DishService } from '../services/dish.service';
+import { RefreshService } from '../services/refresh.service';
 import { Dish } from '../models/dish';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -20,12 +21,12 @@ export class MenuComponent implements OnInit {
   error: any;
   subscription: Subscription;
 
-  constructor(private dishService:DishService,private dialog:MatDialog) { 
+  constructor(private dishService:DishService,private dialog:MatDialog,private refresh:RefreshService) { 
     this.shoppingCart = [];
     this.onDish = [];
     this.qty = [];
 
-    this.dishService.getNotification()
+    this.refresh.getNotification()
                     .subscribe(result=> {
                       this.getDishDetails();
                     });

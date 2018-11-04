@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Dish } from '../models/dish';
-import { Observable,of, throwError,Subject } from 'rxjs';
+import { Observable,throwError } from 'rxjs';
 import { HttpClient,HttpErrorResponse } from '@angular/common/http';
 import { baseUrl } from '../models/baseurl';
 import { catchError } from 'rxjs/operators';
@@ -10,8 +10,6 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DishService {
-
-  private subject = new Subject<any>();
 
   dishes: Dish[];
   index: number;
@@ -28,20 +26,12 @@ export class DishService {
     return throwError('Please Try again later');
   }
 
-  sendNotification() {
-    this.subject.next({text: 'Page Refresh'});
-  }
-
   setDishes(dishes:Dish[]){
     this.dishes = dishes;
   }
 
   getDishes(){
     return this.dishes;
-  }
-
-  getNotification():Observable<any> {
-    return this.subject.asObservable();
   }
 
   getDishDetails(): Observable<Dish[]> {
@@ -59,7 +49,7 @@ export class DishService {
                     .pipe(catchError(this.errorHandler));
   }
 
-  updateDishPrice(dish: Dish):Observable<any> {
+  updateDishPrice(dish: Dish){
     return this.http.post(baseUrl + 'manager/changeDishPrice',dish)
                     .pipe(catchError(this.errorHandler));
   }
