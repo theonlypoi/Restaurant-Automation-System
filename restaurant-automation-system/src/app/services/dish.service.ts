@@ -13,7 +13,9 @@ export class DishService {
 
   private subject = new Subject<any>();
 
-  status:boolean = false;
+  dishes: Dish[];
+  index: number;
+
   constructor(private http: HttpClient) { }
 
   private errorHandler(Error: HttpErrorResponse) {
@@ -26,8 +28,16 @@ export class DishService {
     return throwError('Please Try again later');
   }
 
-  sendAddNotification() {
-    this.subject.next({text: 'New Item Added'});
+  sendNotification() {
+    this.subject.next({text: 'Page Refresh'});
+  }
+
+  setDishes(dishes:Dish[]){
+    this.dishes = dishes;
+  }
+
+  getDishes(){
+    return this.dishes;
   }
 
   getNotification():Observable<any> {
@@ -46,6 +56,11 @@ export class DishService {
 
   addNewDish(dish: Dish) {
     return this.http.post(baseUrl + 'manager/addNewDish',dish)
+                    .pipe(catchError(this.errorHandler));
+  }
+
+  updateDishPrice(dish: Dish):Observable<any> {
+    return this.http.post(baseUrl + 'manager/changeDishPrice',dish)
                     .pipe(catchError(this.errorHandler));
   }
 }

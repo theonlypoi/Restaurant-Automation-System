@@ -28,6 +28,7 @@ import { LoginComponent } from './login/login.component';
 
 import { baseUrl } from './models/baseurl';
 import { DishaddComponent } from './dishadd/dishadd.component';
+import { PriceupdateComponent } from './priceupdate/priceupdate.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DishaddComponent } from './dishadd/dishadd.component';
     HomeComponent,
     MenuComponent,
     LoginComponent,
-    DishaddComponent
+    DishaddComponent,
+    PriceupdateComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { DishaddComponent } from './dishadd/dishadd.component';
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,
-    DishaddComponent
+    DishaddComponent,
+    PriceupdateComponent
   ]
 })
 export class AppModule { }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DishService } from '../services/dish.service';
 import { Dish } from '../models/dish';
 import { Subscription } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { PriceupdateComponent } from '../priceupdate/priceupdate.component';
 
 @Component({
   selector: 'app-menu',
@@ -18,7 +20,7 @@ export class MenuComponent implements OnInit {
   error: any;
   subscription: Subscription;
 
-  constructor(private dishService:DishService) { 
+  constructor(private dishService:DishService,private dialog:MatDialog) { 
     this.shoppingCart = [];
     this.onDish = [];
     this.qty = [];
@@ -41,6 +43,7 @@ export class MenuComponent implements OnInit {
                         this.onDish.push(false);
                       }
                       this.height_of_div = 200*((this.dishes.length/4) + 1);
+                      this.dishService.setDishes(this.dishes);
                     },
                     error => {
                       this.error = error;
@@ -49,6 +52,19 @@ export class MenuComponent implements OnInit {
 
   onHover(i): void {
     this.onDish[i] = !this.onDish[i];
+  }
+
+  openPriceUpdateForm(i: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      "index": i
+    };
+
+    this.dialog.open(PriceupdateComponent,dialogConfig);
   }
 
   addToCart(i: number): void {

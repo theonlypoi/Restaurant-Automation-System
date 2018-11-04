@@ -55,7 +55,7 @@ export class DishaddComponent implements OnInit {
     this.dishService.addNewDish(this.dish)
                     .subscribe(data => { 
                       console.log(data); 
-                      this.dishService.sendAddNotification();
+                      this.dishService.sendNotification();
                       this.dialogRef.close();
                     });
   }

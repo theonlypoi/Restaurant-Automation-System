@@ -1,0 +1,30 @@
+<!-- Form for dish updation -->
+<mat-toolbar color="primary">Update Price
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close> &times;</button>
+</mat-toolbar>
+<form novalidate [formGroup]="priceUpdateForm">
+  <mat-dialog-content>
+    <p>
+      <mat-form-field> 
+        <input matInput type="text" readonly placeholder="dish name" formControlName="name"> 
+      </mat-form-field>
+      <mat-form-field> 
+        <input matInput type="text" readonly placeholder="category" formControlName="category"> 
+      </mat-form-field>
+      <mat-form-field> 
+        <input matInput type="text" readonly formControlName="image"> 
+      </mat-form-field>
+      <mat-form-field> 
+        <textarea matInput rows="3" readonly formControlName="description"> {{ description }} </textarea>
+      </mat-form-field>
+      <mat-form-field> 
+          <input matInput type="number" min="10" placeholder="price" required formControlName="price"> 
+      </mat-form-field>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" class="spacer" [disabled]="priceUpdateForm.invalid"> Update </button>
+    <button mat-raised-button color="warn" class="spacer"> Cancel </button>
+  </mat-dialog-actions>
+</form>
