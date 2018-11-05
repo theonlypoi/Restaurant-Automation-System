@@ -74,4 +74,8 @@ export class MenuComponent implements OnInit {
       this.qty.push(1);
     } 
   }
+
+  cartRestore(event) {
+    this.shoppingCart.length = 0;
+  }
 }

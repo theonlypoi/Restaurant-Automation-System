@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { Dish } from '../models/dish';
 import { ShoppingcartService } from '../services/shoppingcart.service';
 import { ShoppingCart } from '../models/shoppingcart';
@@ -26,6 +26,9 @@ export class ShoppingcartComponent implements OnInit {
   @Input('qty')
   qty: number[];
 
+  @Output('restore')
+  restore = new EventEmitter<boolean>();
+
   constructor(private cartService: ShoppingcartService,private dialog:MatDialog) { 
     this.getInvoiceNumber();
   }
@@ -50,6 +53,7 @@ export class ShoppingcartComponent implements OnInit {
   }
 
   constructShoppingCart() {
+    this.cartGroup = [];
     this.shoppingCart.forEach((item,index) => {
       this.cart = new ShoppingCart();
       this.cart.name = item.name;
@@ -67,7 +71,7 @@ export class ShoppingcartComponent implements OnInit {
     this.cartService.dishSale(this.cartGroup)
                     .subscribe(result => {
                       console.log(result);
-                      this.shoppingCart = [];
+                      this.restore.emit(true);
                       this.generateBill();
                     },
                     error => {
@@ -84,7 +88,6 @@ export class ShoppingcartComponent implements OnInit {
     dialogConfig.data = {
       "purchased":this.cartGroup
     };
-
     this.dialog.open(BillgenerationComponent,dialogConfig);
   }
 }
