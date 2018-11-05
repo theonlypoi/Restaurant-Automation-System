@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Dish } from '../models/dish';
 import { ShoppingcartService } from '../services/shoppingcart.service';
 import { ShoppingCart } from '../models/shoppingcart';
+import { MatDialog,MatDialogConfig } from '@angular/material';
+import { BillgenerationComponent } from '../billgeneration/billgeneration.component';
 
 @Component({
   selector: 'app-shoppingcart',
@@ -24,7 +26,7 @@ export class ShoppingcartComponent implements OnInit {
   @Input('qty')
   qty: number[];
 
-  constructor(private cartService: ShoppingcartService) { 
+  constructor(private cartService: ShoppingcartService,private dialog:MatDialog) { 
     this.getInvoiceNumber();
   }
 
@@ -50,6 +52,7 @@ export class ShoppingcartComponent implements OnInit {
   constructShoppingCart() {
     this.shoppingCart.forEach((item,index) => {
       this.cart = new ShoppingCart();
+      this.cart.name = item.name;
       this.cart.itemid = item.itemid;
       this.cart.quantitysold = this.qty[index];
       this.cart.invoicenumber = this.lastInvoice + 1;
@@ -61,13 +64,27 @@ export class ShoppingcartComponent implements OnInit {
   
   placeOrder() {
     this.constructShoppingCart();
-    console.log(this.cartGroup);
-    /*this.cartService.dishSale(this.cartGroup)
+    this.cartService.dishSale(this.cartGroup)
                     .subscribe(result => {
                       console.log(result);
+                      this.shoppingCart = [];
+                      this.generateBill();
                     },
                     error => {
                       console.log(error);
-                    })*/
+                    });
+  }
+
+  generateBill() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.height = '600px';
+    dialogConfig.width = '600px';
+    dialogConfig.data = {
+      "purchased":this.cartGroup
+    };
+
+    this.dialog.open(BillgenerationComponent,dialogConfig);
   }
 }

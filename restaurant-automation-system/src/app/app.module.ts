@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 import 'hammerjs';
 
@@ -30,6 +31,7 @@ import { baseUrl } from './models/baseurl';
 import { DishaddComponent } from './dishadd/dishadd.component';
 import { PriceupdateComponent } from './priceupdate/priceupdate.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
+import { BillgenerationComponent } from './billgeneration/billgeneration.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     LoginComponent,
     DishaddComponent,
     PriceupdateComponent,
-    ShoppingcartComponent
+    ShoppingcartComponent,
+    BillgenerationComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
     MatDialogModule,
     MatIconModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTableModule
   ],
   exports:[],
   providers: [
@@ -71,7 +75,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
   entryComponents: [
     LoginComponent,
     DishaddComponent,
-    PriceupdateComponent
+    PriceupdateComponent,
+    BillgenerationComponent
   ]
 })
 export class AppModule { }
