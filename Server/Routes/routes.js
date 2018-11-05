@@ -23,9 +23,8 @@
     router.get('/manager/salaryDetails',manager.monthlySalaryDetails);
     router.get('/manager/expenseDetails',manager.monthlyExpenseDetails);
     
-    
-    
     // For SalesClerk 
+    router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
     router.post('/sclerk/dishSale',sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',sclerk.ingredientPurchase);
 

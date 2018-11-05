@@ -74,9 +74,4 @@ export class MenuComponent implements OnInit {
       this.qty.push(1);
     } 
   }
-
-  removeFromCart(i: number): void {
-    this.shoppingCart.splice(i,1);
-    this.qty.splice(i,1);
-  }
 }

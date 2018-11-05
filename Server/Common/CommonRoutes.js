@@ -6,15 +6,19 @@
      // From Github page of node-postgres  issue #530
      // May give some wrong result, probably because of the unordered nature of Object.Keys()
      // This will be used when we need to insert multiple rows of data to db
-     exports.buildstatement = function(insert,rows) {
+     exports.buildstatement = function(insert,rows,objectKeys) { 
         const params = [];
         const chunks = [];
         rows.forEach(row => {
             const valueclause = [];
-            Object.keys(row).forEach(p => {
+            /*Object.keys(row).forEach(p => {
                 params.push(row[p]);
                 valueclause.push('$' + params.length);
-            })
+            })*/
+            objectKeys.forEach(key => {
+                params.push(row[key]);
+                valueclause.push('$' + params.length);
+            });
             chunks.push('(' + valueclause.join(',') + ')');
         })
         return {

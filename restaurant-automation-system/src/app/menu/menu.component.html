@@ -28,16 +28,7 @@
     <div fxFlex="5">
     </div>
     <div fxFlex="20">
-        <div fxFlex class="scroll" [style.height]="height_of_div + 'px'">
-            <h3> Your Cart </h3>
-            <hr>
-            <mat-list *ngFor="let dish of shoppingCart;let i = index">
-                {{ dish.name }}  <p> Price: {{ dish.price * qty[i] | currency: '&#8377;'}} </p>
-               <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity" style="width:50%"> 
-               <span><button mat-button (click)="removeFromCart(i)"> <i class="material-icons"> remove_shopping_cart</i></button></span>
-                <mat-divider></mat-divider>
-            </mat-list>
-        </div>
+        <app-shoppingcart [shoppingCart]=shoppingCart [qty]=qty> </app-shoppingcart>
     </div>     
 </div>
 <div [hidden]="dishes || error">

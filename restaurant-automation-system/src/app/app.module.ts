@@ -29,6 +29,7 @@ import { LoginComponent } from './login/login.component';
 import { baseUrl } from './models/baseurl';
 import { DishaddComponent } from './dishadd/dishadd.component';
 import { PriceupdateComponent } from './priceupdate/priceupdate.component';
+import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PriceupdateComponent } from './priceupdate/priceupdate.component';
     MenuComponent,
     LoginComponent,
     DishaddComponent,
-    PriceupdateComponent
+    PriceupdateComponent,
+    ShoppingcartComponent
   ],
   imports: [
     BrowserModule,
