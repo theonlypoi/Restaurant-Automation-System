@@ -16,10 +16,11 @@
     // For Managers 
     router.post('/manager/addNewDish',manager.addNewDish);
     router.post('/manager/changeDishPrice',manager.changeDishPrice);
-    router.post('/manager/getSalesReportBetweenDate',manager.getSalesReportBetweenDate);
-    router.post('/manager/getExpenseReportBetweenDate',manager.getExpenseReportBetweenDate);
+    router.post('/manager/getCustomSalesReport',manager.getSalesReportBetweenDate);
+    router.post('/manager/getCustomExpenseReport',manager.getExpenseReportBetweenDate);
     
-    router.get('/manager/saleDetails',manager.getMonthlySalesReport);
+    router.get('/manager/monthlySaleDetails',manager.getMonthlySalesReport);
+    router.get('/manager/weeklySaleDetails',manager.getWeeklySalesReport);
     router.get('/manager/salaryDetails',manager.monthlySalaryDetails);
     router.get('/manager/expenseDetails',manager.monthlyExpenseDetails);
     

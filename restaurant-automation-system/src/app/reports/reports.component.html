@@ -1,0 +1,95 @@
+<mat-tab-group>
+  <mat-tab label="Monthly Sales"> 
+    <table mat-table #monthSort="matSort" [dataSource]="monthlyDataSource" matSort>
+        <ng-container matColumnDef="itemname"> 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Dish Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.itemname }} </td>
+        </ng-container>
+        <ng-container matColumnDef="category"> 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+          <td mat-cell *matCellDef="let element"> {{ element.category }} </td>
+        </ng-container>
+        <ng-container matColumnDef="quantity"> 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Quantity Sold </th>
+          <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+        </ng-container>
+        <ng-container matColumnDef="price"> 
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Sale </th>
+          <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+      </table>
+      <mat-paginator #monthPaginator="matPaginator" [length]="monthlyReportLen"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              showFirstLastButtons>
+      </mat-paginator>
+  </mat-tab>
+  <mat-tab label="Weekly Sales"> 
+      <table mat-table  #weekSort="matSort" [dataSource]="weeklyDataSource" matSort>
+          <ng-container matColumnDef="itemname"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Dish Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.itemname }} </td>
+          </ng-container>
+          <ng-container matColumnDef="category"> 
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Category </th>
+            <td mat-cell *matCellDef="let element"> {{ element.category }} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Quantity Sold </th>
+            <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+          </ng-container>
+          <ng-container matColumnDef="price"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Sale </th>
+            <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+        <mat-paginator #weekPaginator="matPaginator" [length]="weeklyReportLen"
+              [pageSize]="5"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              showFirstLastButtons>
+        </mat-paginator>
+    </mat-tab>
+    <mat-tab label="Custom Sale"> 
+        <div fxFlex="row">
+          <div fxFlex="30">
+            <input type="date" placeholder="Enter Starting Date" [(ngModel)]="startDate" class="spacer">
+          </div>
+          <div fxFlex="30">
+            <input type="date" placeholder="Enter Final Date" [(ngModel)]="endDate" class="spacer">
+          </div>
+          <div fxFlex="30">
+            <button mat-raised-button color="primary" (click)="getCustomSalesReport()" class="spacer"> Fetch </button>
+          </div>
+        </div>
+          
+        <table mat-table  #customSort="matSort" [dataSource]="customDataSource" matSort>
+            <ng-container matColumnDef="itemname"> 
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Dish Name </th>
+              <td mat-cell *matCellDef="let element"> {{ element.itemname }} </td>
+            </ng-container>
+            <ng-container matColumnDef="category"> 
+              <th mat-header-cell *matHeaderCellDef  mat-sort-header> Category </th>
+              <td mat-cell *matCellDef="let element"> {{ element.category }} </td>
+            </ng-container>
+            <ng-container matColumnDef="quantity"> 
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Quantity Sold </th>
+              <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+            </ng-container>
+            <ng-container matColumnDef="price"> 
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Sale </th>
+              <td mat-cell *matCellDef="let element"> {{ element.price }} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+          </table>
+          <mat-paginator #customPaginator="matPaginator" [length]="weeklyReportLen"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                showFirstLastButtons>
+          </mat-paginator>
+      </mat-tab>
+</mat-tab-group>

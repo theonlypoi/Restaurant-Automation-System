@@ -17,6 +17,9 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import 'hammerjs';
 
@@ -32,6 +35,8 @@ import { DishaddComponent } from './dishadd/dishadd.component';
 import { PriceupdateComponent } from './priceupdate/priceupdate.component';
 import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { BillgenerationComponent } from './billgeneration/billgeneration.component';
+import { ReportsComponent } from './reports/reports.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,8 @@ import { BillgenerationComponent } from './billgeneration/billgeneration.compone
     DishaddComponent,
     PriceupdateComponent,
     ShoppingcartComponent,
-    BillgenerationComponent
+    BillgenerationComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +71,11 @@ import { BillgenerationComponent } from './billgeneration/billgeneration.compone
     MatIconModule,
     HttpClientModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDatepickerModule
   ],
   exports:[],
   providers: [

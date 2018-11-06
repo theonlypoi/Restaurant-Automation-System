@@ -54,6 +54,16 @@
                 .catch(err => {return next(err);})
      };
 
+     exports.getWeeklySalesReport = function(req,res,next) {
+        let query = "select * from getWeeklySalesReport()";
+
+        common.dbConnection(query)
+                .then(result => {
+                    res.status(200).json(result.rows);
+                })
+                .catch(err => {return next(err);})
+     };
+
      exports.monthlySalaryDetails = function(req,res,next) {
         let query = "select * from monthlysalarydetails()";
 
@@ -78,7 +88,7 @@
      exports.getSalesReportBetweenDate = function(req,res,next) {
         let query = "select * from getSalesReportBetweenDate($1,$2)";
         let params = [req.body.startdate,req.body.enddate];
-
+        
         common.dbConnection(query,params)
                    .then(result => {
                       res.status(200).json(result.rows);

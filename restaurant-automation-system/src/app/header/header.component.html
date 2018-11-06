@@ -18,7 +18,7 @@
       <button mat-menu-item> Generate Bill </button>
       <button mat-menu-item> Item Sale </button>
     </mat-menu>
-  <a mat-button *ngIf="isAdmin()"> <i class="material-icons"> receipt </i>Reports </a>
+  <button mat-button *ngIf="isAdmin()" [routerLink]="['/reports']"> <i class="material-icons"> receipt </i>Reports </button>
   <span class="flex-spacer"></span>
   <button mat-button (click)="openLoginForm()"> <i class="material-icons"> exit_to_app </i> Login </button>
 </mat-toolbar>
