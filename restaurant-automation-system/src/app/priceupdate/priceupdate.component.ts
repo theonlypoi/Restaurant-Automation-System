@@ -4,7 +4,7 @@ import { DishService } from '../services/dish.service';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RefreshService } from '../services/refresh.service';
-
+import { ToastrService } from '../services/toastr.service';
 
 @Component({
   selector: 'app-priceupdate',
@@ -21,13 +21,13 @@ export class PriceupdateComponent implements OnInit {
 
   constructor(private dishService:DishService,private fb: FormBuilder,private dialogRef:MatDialogRef<PriceupdateComponent>,
               @Inject(MAT_DIALOG_DATA) public data:any,
-              private refresh: RefreshService) { 
+              private refresh: RefreshService,
+              private toastrService:ToastrService) { 
     this.getDishes();
     this.createPriceUpdateForm(); 
   }
 
   ngOnInit() {
-    
   }
 
   getDishes() {
@@ -52,9 +52,13 @@ export class PriceupdateComponent implements OnInit {
     this.updatedDish = this.priceUpdateForm.value;
     this.dishService.updateDishPrice(this.updatedDish)
                     .subscribe(result => {
-                      console.log(result);
+                      this.toastrService.success("Price updation successful");
                       this.refresh.sendNotification();
                       this.dialogRef.close();
+                    },
+                    error => {
+                      this.dialogRef.close();
+                      this.toastrService.error("Price updation failed");
                     });
   }
 
