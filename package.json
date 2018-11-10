@@ -23,7 +23,7 @@
     "passport-local": "^1.0.0",
     "passport-local-postgres": "^1.0.3",
     "pg": "^7.5.0",
-    "pg-promise": "^8.5.0",
+    "pg-promise": "^8.5.2",
     "promise": "^8.0.2",
     "q": "^1.5.1"
   }

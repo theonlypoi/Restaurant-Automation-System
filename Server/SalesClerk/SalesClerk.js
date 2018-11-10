@@ -2,6 +2,7 @@
 (function() {
     'use strict';
     const common = require('../Common/CommonRoutes');
+    const {db,pgp} = require('../pgpconfig');
 
     exports.dishSale = function(req,res,next) {
         let objectKeys = ['itemid','quantitysold','totalprice','invoicenumber'];
@@ -31,5 +32,29 @@
                           res.status(200).json(result.rows);
                       })
                       .catch(err => { return next(err);})
+    }
+
+    /* These are to be implemented as postgresql functions. Try to implement if time permits.*/
+    exports.getStockDetails = (req,res,next) => {
+        let query = "select * from ingredient";
+        common.dbConnection(query) 
+                      .then(result => {
+                        res.status(200).json(result.rows);
+                      })
+                      .catch(err => { return next(err);})
+    }
+
+    exports.addNewStock = (req,res,next) => {
+        // for multi update using pg-promise 
+        const cs = new pgp.helpers.ColumnSet(['?ingredientid','availability'],{table:'ingredient'});
+        const update = pgp.helpers.update(req.body,cs) + 'WHERE v.ingredientid = t.ingredientid';
+
+        db.none(update)
+          .then(()=>{
+            res.status(200).json({"message":"New ingredients added to stock."});
+          })
+          .catch(err => {
+            return next(err);
+          });
     }
 })();

@@ -6,7 +6,7 @@
      // From Github page of node-postgres  issue #530
      // May give some wrong result, probably because of the unordered nature of Object.Keys()
      // This will be used when we need to insert multiple rows of data to db
-     exports.buildstatement = function(insert,rows,objectKeys) { 
+     exports.buildstatement = function(query,rows,objectKeys) { 
         const params = [];
         const chunks = [];
         rows.forEach(row => {
@@ -21,10 +21,11 @@
             });
             chunks.push('(' + valueclause.join(',') + ')');
         })
+
         return {
-            text: insert + chunks.join(','),
+            text: query + chunks.join(','),
             values: params
-        }
+        }        
      };
 
     // common place for connecting to the db and retrieving the results

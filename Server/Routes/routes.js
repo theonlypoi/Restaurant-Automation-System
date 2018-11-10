@@ -26,8 +26,11 @@
     
     // For SalesClerk 
     router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
+    router.get('/sclerk/getStockDetails',sclerk.getStockDetails);
     router.post('/sclerk/dishSale',sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',sclerk.ingredientPurchase);
+    router.post('/sclerk/addNewStock',sclerk.addNewStock);
+
 
     module.exports = router;
 })();
