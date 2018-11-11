@@ -3,10 +3,12 @@
   <hr>
   <mat-list *ngFor="let dish of shoppingCart;let i = index">
       {{ dish.name }}  <p> Price: {{ dish.price * qty[i] | currency: '&#8377;'}} </p>
-     <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity" style="width:50%"> 
+     <input matInput type="number" min="1" [(ngModel)]="qty[i]" placeholder="quantity" style="width:50%"
+     (input)="quantityHandler(dish.itemid,$event,i)" [disabled] ="maxPossible[i]">
      <span><button mat-button (click)="removeFromCart(i)"> <i class="material-icons"> remove_shopping_cart</i></button></span>
      <mat-divider></mat-divider>
   </mat-list>
   <br>
-  <button *ngIf="isValid()" mat-raised-button color="primary" class="spacer" (click)="placeOrder()"> Order </button>
+  <button *ngIf="isValid()" mat-raised-button color="primary" class="spacer" (click)="placeOrder()"
+  [disabled]="err"> Order </button>
 </div>

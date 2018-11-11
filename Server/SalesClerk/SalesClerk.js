@@ -36,7 +36,7 @@
 
     /* These are to be implemented as postgresql functions. Try to implement if time permits.*/
     exports.getStockDetails = (req,res,next) => {
-        let query = "select * from ingredient";
+        let query = "select * from getdishStockDetails()";
         common.dbConnection(query) 
                       .then(result => {
                         res.status(200).json(result.rows);
@@ -44,7 +44,16 @@
                       .catch(err => { return next(err);})
     }
 
-    exports.addNewStock = (req,res,next) => {
+    exports.getIngredients = (req,res,next) => {
+      let query = "select * from ingredient order by ingredientid";
+      common.dbConnection(query)
+                    .then(result => {
+                      res.status(200).json(result.rows);
+                    })
+                    .catch(err => { return next(err);}) 
+    }
+
+    exports.refreshStock = (req,res,next) => {
         // for multi update using pg-promise 
         const cs = new pgp.helpers.ColumnSet(['?ingredientid','availability'],{table:'ingredient'});
         const update = pgp.helpers.update(req.body,cs) + 'WHERE v.ingredientid = t.ingredientid';

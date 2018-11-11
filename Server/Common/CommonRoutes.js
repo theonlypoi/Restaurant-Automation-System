@@ -83,4 +83,14 @@
                })
                .catch(err => { return next(err);})
     }
+
+    exports.getDishStock = function(req,res,next) {
+        let query = "select * from getdishstockdetails()";
+
+        dbConnection(query) 
+               .then(result =>  {
+                   res.status(200).json(result.rows);
+               })
+               .catch(err => { return next(err);})
+    }
 })();

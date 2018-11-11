@@ -12,6 +12,7 @@
     router.get('/getDishDetails',common.getDishDetails);
     router.get('/getDishDetails/:category',common.getCategorizedDishDetails);
     router.get('/getCategories',common.getCategories);
+    router.get('/availableStock',common.getDishStock);
     
     // For Managers 
     router.post('/manager/addNewDish',manager.addNewDish);
@@ -27,9 +28,10 @@
     // For SalesClerk 
     router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
     router.get('/sclerk/getStockDetails',sclerk.getStockDetails);
+    router.get('/sclerk/getIngredients',sclerk.getIngredients);
     router.post('/sclerk/dishSale',sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',sclerk.ingredientPurchase);
-    router.post('/sclerk/addNewStock',sclerk.addNewStock);
+    router.post('/sclerk/addNewStock',sclerk.refreshStock);
 
 
     module.exports = router;

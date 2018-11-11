@@ -20,6 +20,6 @@ export class ToastrService {
   }
 
   warn(title:string,message?:string) {
-    toastr.warn(title,message);
+    toastr.warning(title,message);
   }
 }

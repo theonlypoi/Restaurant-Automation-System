@@ -37,6 +37,8 @@ import { ShoppingcartComponent } from './shoppingcart/shoppingcart.component';
 import { BillgenerationComponent } from './billgeneration/billgeneration.component';
 import { ReportsComponent } from './reports/reports.component';
 import { MatSortModule } from '@angular/material/sort';
+import { StockdetailComponent } from './stockdetail/stockdetail.component';
+import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { MatSortModule } from '@angular/material/sort';
     PriceupdateComponent,
     ShoppingcartComponent,
     BillgenerationComponent,
-    ReportsComponent
+    ReportsComponent,
+    StockdetailComponent,
+    ModifiedcurrencyPipe
   ],
   imports: [
     BrowserModule,

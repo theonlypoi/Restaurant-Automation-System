@@ -28,7 +28,9 @@
     <div fxFlex="5">
     </div>
     <div fxFlex="20">
-        <app-shoppingcart [shoppingCart]=shoppingCart [qty]=qty (restore)="cartRestore($event)"> </app-shoppingcart>
+        <app-shoppingcart [shoppingCart]=shoppingCart [qty]=qty 
+                          [maxPossible]=maxPossible (restore)="cartRestore($event)"
+                          [length]= shoppingLen> </app-shoppingcart>
     </div>     
 </div>
 <div [hidden]="dishes || error">

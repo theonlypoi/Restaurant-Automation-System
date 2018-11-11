@@ -4,6 +4,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { LoginComponent } from '../login/login.component';
 import { DishaddComponent } from '../dishadd/dishadd.component';
 import { ReportsComponent } from '../reports/reports.component';
+import { StockdetailComponent } from '../stockdetail/stockdetail.component';
 
 export const routes:Routes = [
     {path: 'home',component: HomeComponent},
@@ -11,5 +12,6 @@ export const routes:Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'addItem',component: DishaddComponent},
     {path: 'reports',component: ReportsComponent},
+    {path: 'stock',component: StockdetailComponent},
     {path: '',redirectTo: '/home',pathMatch: 'full'}
 ]

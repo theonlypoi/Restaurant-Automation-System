@@ -4,6 +4,8 @@ import { Dish } from '../models/dish';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material';
 import { RefreshService } from '../services/refresh.service';
+import { ToastrService } from '../services/toastr.service';
+import { StockService } from '../services/stock.service';
 
 @Component({
   selector: 'app-dishadd',
@@ -24,7 +26,9 @@ export class DishaddComponent implements OnInit {
 
   constructor(private dishService:DishService,private fb:FormBuilder,
               public dialogRef:MatDialogRef<DishaddComponent>,
-              private refresh: RefreshService) { 
+              private refresh: RefreshService,
+              private toastrService:ToastrService,
+              private stockService:StockService) { 
     this.createDishItemForm();
     this.getCategories();
   }
@@ -55,10 +59,15 @@ export class DishaddComponent implements OnInit {
   addNewDish() {
     this.dish = this.dishForm.value;
     this.dishService.addNewDish(this.dish)
-                    .subscribe(data => { 
-                      console.log(data); 
+                    .subscribe(result => { 
+                      this.toastrService.success("New item added successfully");
+                      this.toastrService.info("Please update the ingredients required for this dish");
                       this.refresh.sendNotification();
                       this.dialogRef.close();
+                    },
+                    error => {
+                      this.dialogRef.close();
+                      this.toastrService.error("Dish insertion failed");
                     });
   }
 }

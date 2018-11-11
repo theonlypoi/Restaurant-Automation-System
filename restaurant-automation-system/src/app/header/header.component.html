@@ -13,7 +13,7 @@
   <button mat-button [matMenuTriggerFor]="sclerk_menu" *ngIf="isAdmin() || isSalesClerk()">
     <i class="material-icons"> assessment </i> Inventory Management</button>
     <mat-menu #sclerk_menu="matMenu"> 
-      <button mat-menu-item> Stock Detail </button>
+      <button mat-menu-item [routerLink]="['/stock']"> Stock Detail </button>
       <button mat-menu-item> Order Ingredient </button>
       <button mat-menu-item> Add New Ingredient </button>
       <button mat-menu-item> Ingredient For Dish</button>
