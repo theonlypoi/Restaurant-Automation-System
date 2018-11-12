@@ -5,6 +5,7 @@ import { LoginComponent } from '../login/login.component';
 import { DishaddComponent } from '../dishadd/dishadd.component';
 import { ReportsComponent } from '../reports/reports.component';
 import { StockdetailComponent } from '../stockdetail/stockdetail.component';
+import { PurchasestockComponent } from '../purchasestock/purchasestock.component';
 
 export const routes:Routes = [
     {path: 'home',component: HomeComponent},
@@ -13,5 +14,6 @@ export const routes:Routes = [
     {path: 'addItem',component: DishaddComponent},
     {path: 'reports',component: ReportsComponent},
     {path: 'stock',component: StockdetailComponent},
+    {path: 'purchaseStock',component: PurchasestockComponent},
     {path: '',redirectTo: '/home',pathMatch: 'full'}
 ]

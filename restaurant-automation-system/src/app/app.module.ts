@@ -40,6 +40,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { StockdetailComponent } from './stockdetail/stockdetail.component';
 import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
 import { IngredientorderComponent } from './ingredientorder/ingredientorder.component';
+import { PurchasestockComponent } from './purchasestock/purchasestock.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { IngredientorderComponent } from './ingredientorder/ingredientorder.comp
     ReportsComponent,
     StockdetailComponent,
     ModifiedcurrencyPipe,
-    IngredientorderComponent
+    IngredientorderComponent,
+    PurchasestockComponent
   ],
   imports: [
     BrowserModule,

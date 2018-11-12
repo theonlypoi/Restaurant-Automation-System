@@ -16,9 +16,11 @@
 
     exports.ingredientPurchase = function(req,res,next) {
         let objectKeys = ['invoice','ingredientid','quantity','vendorname','totalcost'];
+       
         let query = common.buildstatement
     ("insert into ingredientpurchase(invoice,ingredientid,quantity,vendorname,totalcost) values",req.body,objectKeys);
-        common.dbConnection(query)
+    
+    common.dbConnection(query)
                       .then(result => {
                         res.status(200).json({message:"Ingredient purchase successful"});
                       })
@@ -32,6 +34,15 @@
                           res.status(200).json(result.rows);
                       })
                       .catch(err => { return next(err);})
+    }
+
+    exports.getStockInvoiceNumber = (req,res,next) => {
+      let query = "select max(invoice) as invoice from ingredientpurchase";
+      common.dbConnection(query)
+          .then(result => {
+              res.status(200).json(result.rows);
+          })
+          .catch(err => { return next(err);})
     }
 
     /* These are to be implemented as postgresql functions. Try to implement if time permits.*/

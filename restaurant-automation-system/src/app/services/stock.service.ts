@@ -158,4 +158,12 @@ export class StockService {
       return this.obj;
     } 
   }
+
+  getInvoiceNumber() {
+    return this.http.get(baseUrl + 'sclerk/stockInvoiceNumber');
+  }
+
+  addNewStock(data) {
+    return this.http.post(baseUrl + 'sclerk/ingredientPurchase',data);
+  }
 }

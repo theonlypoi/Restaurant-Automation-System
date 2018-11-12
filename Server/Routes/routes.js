@@ -28,6 +28,7 @@
     // For SalesClerk 
     router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
     router.get('/sclerk/getStockDetails',sclerk.getStockDetails);
+    router.get('/sclerk/stockInvoiceNumber',sclerk.getStockInvoiceNumber);
     router.get('/sclerk/getIngredients',sclerk.getIngredients);
     router.post('/sclerk/dishSale',sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',sclerk.ingredientPurchase);

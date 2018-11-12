@@ -1,0 +1,30 @@
+<div fxLayout="column" fxFlex class="space">
+  <h4> Add Purchased Ingredients </h4>
+  <form novalidate [formGroup]="stockPurchaseForm" #mform="ngForm">
+    <!-- {{ stockPurchaseForm.value | json }} -->
+    <div>
+      <mat-form-field>
+        <input type="text" matInput placeholder="vendor name" required formControlName="vendorName">
+      </mat-form-field>
+    </div>
+    <div>
+    <div formArrayName="stock" *ngFor="let elem of stockPurchaseForm.get('stock').controls;let i =index">
+      <div [formGroupName]="i">
+        <mat-form-field>
+          <mat-select name="ingredient" formControlName="ingredientid" placeholder="choose ingredient" required>
+            <mat-option *ngFor="let ing of prevStock" [value]="ing.ingredientid">
+              {{ ing.ingredientname }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="quantity" min="1" formControlName="quantity">
+        </mat-form-field>
+        <span> Price: {{ totalCost[i] }} </span>
+      </div>
+    </div>
+    <button mat-button color="primary" (click)="addNewIngredient()"> Add new ingredients </button>
+    <button mat-button color="primary" (click)="addNewStock()" [disabled]="stockPurchaseForm.invalid"> Add Stock </button>
+  </div>
+  </form>
+</div>
