@@ -2,6 +2,7 @@
 (function() {
     'use strict';
      const pool = require('../../Server/dbconfig');
+     const auth = require('../authentication/auth');
 
      // From Github page of node-postgres  issue #530
      // May give some wrong result, probably because of the unordered nature of Object.Keys()
@@ -93,4 +94,39 @@
                })
                .catch(err => { return next(err);})
     }
+
+
+    exports.login = (req,res,next) => {
+        if(req.user) {
+            // if user is already present in the request body
+            // find out the token
+            const token = auth.tokenForUser(req.user);
+            const id = req.user.userid,
+                  username = req.user.username,
+                  roletype = req.user.roletype;
+            // send the token to the client side
+            res.status(200).json({
+                'token':token, 
+                'roletype': roletype,
+            });
+        } else {
+            res.status(403).json({
+                "message":"Unauthorized access"
+            })
+        }
+    }
+
+    exports.logout = (req,res) => {
+        if(req.user){
+         req.logOut();
+         res.status(200).json({
+             "message":"Successfully logged out"
+         })
+        }
+        else{
+          res.status(401).json({
+            message: 'You are not logged in!'
+          });
+        }
+      }
 })();

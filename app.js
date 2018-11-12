@@ -5,6 +5,9 @@
      const bodyParser = require('body-parser');
      const morgan  = require('morgan');
      const cors = require('cors');
+
+     require('./Server/passport');
+
      const port = process.env.EXPRESS_PORT || 8080;
      const host = process.env.APP_HOST || 'localhost';
      
@@ -26,6 +29,7 @@
      // REST END POINTS TO BE DEFINED HERE
      // In the Routes folder inside the routes.js file REST END POINTS are defined.
 
+     // const auth = require('./Server/authentication/auth.js');
      const routes = require('./Server/Routes/routes.js');
      app.use('/',routes);
 
