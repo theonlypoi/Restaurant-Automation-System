@@ -1,5 +1,5 @@
 <!-- ingredient name, ingredient price,ingredient quantity, min balance(threshold)-->
-<div flexLayout="row" fxFlex="10"></div>
+<div flexLayout="row" fxFlex="5"></div>
 <div flexLayout="row" fxFlex="40">
   <h4> Available Stock Details </h4>
   <table mat-table [dataSource]="stockAvailable">
@@ -48,13 +48,19 @@
         <th mat-header-cell *matHeaderCellDef> Min Stock Quantity </th>
         <td mat-cell *matCellDef="let element"> {{ element.threshold }} </td>
       </ng-container>
+      <ng-container matColumnDef="quantity"> 
+        <th mat-header-cell *matHeaderCellDef> Required Quantity </th>
+        <td mat-cell *matCellDef="let element"> 
+          <input type="number" placeholder="Required quantity">
+        </td>
+      </ng-container>
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
     </table>
-    <mat-paginator #ingPaginator="matPaginator" [length]="ingLen"
+    <mat-paginator #belowingPaginator="matPaginator" [length]="belowingLen"
             [pageSize]="5"
             [pageSizeOptions]="[5, 10, 25, 100]"
             showFirstLastButtons>
     </mat-paginator>
-    <button style="margin: 0px 200px" mat-button color="primary" (click)="successNotice()"> Place Order </button>
+    <button style="margin: 0px 200px" mat-button color="primary" (click)="placeOrder()"> Place Order </button>
 </div>

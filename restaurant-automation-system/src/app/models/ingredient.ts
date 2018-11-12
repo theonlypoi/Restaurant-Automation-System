@@ -4,4 +4,5 @@ export class Ingredient {
     price: number;
     availability: number;
     threshold: number;
+    quantity?: number;
 }

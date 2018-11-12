@@ -1,0 +1,32 @@
+<!-- Form for dish updation -->
+<mat-toolbar color="primary">Order Ingredient
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close> &times;</button>
+</mat-toolbar>
+<form novalidate [formGroup]="ingredientOrderForm">
+  <h5> Date: {{ date | date}} </h5>
+  <mat-dialog-content>
+    <div>
+      <mat-form-field>
+        <input matInput type="text" placeholder="vendor name" formControlName="vendorName">
+      </mat-form-field>
+    </div>
+    <div formArrayName="ingredients" *ngFor="let ing of ingredientOrderForm.get('ingredients').controls;let i=index">
+      <div [formGroupName]="i">
+          <mat-form-field>
+            <input matInput type="text" placeholder="ingredient name" formControlName="ingredientname">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="number" placeholder="quantity" min="1" formControlName="quantity">
+          </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" class="spacer" (click)="addIngredient()">
+       Add New Ingredient
+    </button>
+    <button mat-raised-button color="primary" class="spacer" (click)="placeOrder()"
+    [disabled]="ingredientOrderForm.invalid"> Place Order </button>
+  </mat-dialog-actions> 
+</form>

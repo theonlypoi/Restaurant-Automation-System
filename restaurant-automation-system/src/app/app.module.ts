@@ -39,6 +39,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { MatSortModule } from '@angular/material/sort';
 import { StockdetailComponent } from './stockdetail/stockdetail.component';
 import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
+import { IngredientorderComponent } from './ingredientorder/ingredientorder.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
     BillgenerationComponent,
     ReportsComponent,
     StockdetailComponent,
-    ModifiedcurrencyPipe
+    ModifiedcurrencyPipe,
+    IngredientorderComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
     LoginComponent,
     DishaddComponent,
     PriceupdateComponent,
-    BillgenerationComponent
+    BillgenerationComponent,
+    IngredientorderComponent
   ]
 })
 export class AppModule { }
