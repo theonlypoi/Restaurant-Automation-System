@@ -9,6 +9,7 @@ import { Ingredient } from '../models/ingredient';
 import { StockService } from '../services/stock.service';
 import { ToastrService } from '../services/toastr.service';
 import { Requirement } from '../models/requirement';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,8 @@ export class MenuComponent implements OnInit {
   ingredients: Ingredient[];
 
   constructor(private dishService:DishService,private dialog:MatDialog,private refresh:RefreshService,
-              private toastrService:ToastrService,private stockService:StockService) { 
+              private toastrService:ToastrService,private stockService:StockService,
+              private auth:AuthService) { 
     this.shoppingCart = [];
     this.onDish = [];
     this.qty = [];
@@ -50,6 +52,14 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() {
     this.getDishDetails();
+  }
+
+  isLoggedIn() {
+    return this.auth.loggedIn();
+  }
+
+  isManager() {
+    return (this.auth.getUserRole() === 'Manager');
   }
 
   getDishDetails() {

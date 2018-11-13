@@ -52,13 +52,13 @@ export class StockService {
       this.ingredients[ind].availability -= (elem.requirement * quantity);
       // console.log(this.ingredients[ind]);
     };
-    console.log("Initial:",this.ingredients);
+    // console.log("Initial:",this.ingredients);
   }
 
   quantityIncreaseHandler(dishid:number,quantity:number) {
     // check whether it is possible to increase the quantity or not 
-      console.log("Quantity:",quantity);
-      console.log("Dish id:",dishid);
+     // console.log("Quantity:",quantity);
+      // console.log("Dish id:",dishid);
       /*let dishRequirements = []; // this.requirements.filter(require => {require.itemid === dishid;});
 
       for(let elem of this.requirements) {
@@ -66,16 +66,16 @@ export class StockService {
           dishRequirements.push(elem);
         }
       }*/
-      console.log("Quantity Change:",this.ingredients);
+      // console.log("Quantity Change:",this.ingredients);
       let dishRequirements = this.requirements.filter(require => require.itemid === dishid);
 
       let status = false;
-      console.log("Dish Requirements:",dishRequirements);
+      // console.log("Dish Requirements:",dishRequirements);
 
       for(const elem of dishRequirements){
        let dishIngredients = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
-       console.log("Ingredient Available:",dishIngredients.availability);
-       console.log("(elem.requirement * quantity)",(elem.requirement * quantity));
+       // console.log("Ingredient Available:",dishIngredients.availability);
+       // console.log("(elem.requirement * quantity)",(elem.requirement * quantity));
        
        if(dishIngredients.availability - (elem.requirement * quantity) > elem.threshold) {
         // dishIngredients.availability -= (elem.requirement * quantity);
@@ -88,14 +88,17 @@ export class StockService {
        }
       }
       
-      if(status) {
-        for(const elem of dishRequirements){
-          let index = this.ingredients.findIndex(ing => ing.ingredientid === elem.ingredientid);
-          // console.log(this.ingredients[index]);
-          this.ingredients[index].availability -= (elem.requirement * quantity);
-          console.log(this.ingredients[index]);
-        }
+      for(const elem of dishRequirements){
+        let index = this.ingredients.findIndex(ing => ing.ingredientid === elem.ingredientid);
+        // console.log(this.ingredients[index]);
+        this.ingredients[index].availability -= (elem.requirement * quantity);
+        // console.log(this.ingredients[index]);
       }
+
+      // for(const elem of this.ingredientForDish){
+      //   let ing = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
+      //   console.log("Name:",elem.ingredientname,"Quantity",ing.availability);
+      // } 
       return status;
   }
 
@@ -146,10 +149,10 @@ export class StockService {
 
       this.refreshIngredientQuantity(id);
       
-      for(const elem of this.ingredientForDish){
-        let ing = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
-        console.log("Name:",elem.ingredientname,"Quantity",ing.availability);
-      }  
+      // for(const elem of this.ingredientForDish){
+      //   let ing = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
+      //   console.log("Name:",elem.ingredientname,"Quantity",ing.availability);
+      // }  
       return this.obj;
     }
     else {
@@ -165,5 +168,9 @@ export class StockService {
 
   addNewStock(data) {
     return this.http.post(baseUrl + 'sclerk/ingredientPurchase',data);
+  }
+
+  updateStockDetails() {
+    return this.http.post(baseUrl + 'sclerk/updateStockDetail',this.ingredients);
   }
 }

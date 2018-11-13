@@ -7,7 +7,7 @@ import { BillgenerationComponent } from '../billgeneration/billgeneration.compon
 import { ToastrService } from '../services/toastr.service';
 import { StockService } from '../services/stock.service';
 import { DishService } from '../services/dish.service';
-
+import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-shoppingcart',
   templateUrl: './shoppingcart.component.html',
@@ -42,7 +42,8 @@ export class ShoppingcartComponent implements OnInit{
   restore = new EventEmitter<boolean>();
 
   constructor(private cartService: ShoppingcartService,private dialog:MatDialog,
-              private toastrService: ToastrService, private stockService: StockService) {  
+              private toastrService: ToastrService, private stockService: StockService,
+              private auth: AuthService) {  
     this.getInvoiceNumber();
     this.status = [];
     this.err = false;
@@ -89,14 +90,24 @@ export class ShoppingcartComponent implements OnInit{
     this.constructShoppingCart();
     this.cartService.dishSale(this.cartGroup)
                     .subscribe(result => {
-                      console.log(result);
+                      this.toastrService.success("Dish Item sale successful");
                       this.restore.emit(true);
-                      this.generateBill();
+                      this.updateStockDetail();
                       this.getInvoiceNumber();
                     },
                     error => {
                       this.toastrService.error(error);
                     });
+  }
+
+  updateStockDetail() {
+    this.stockService.updateStockDetails()
+        .subscribe(result => {
+          this.generateBill();
+        },
+        err => {
+          this.toastrService.error("Some error occured");
+        })
   }
 
   generateBill() {
@@ -113,23 +124,33 @@ export class ShoppingcartComponent implements OnInit{
 
   quantityHandler(dishid,event,i) {
 
-    //console.log(event);
+    this.oldValue[i] = this.newValue[i];
+    if(isNaN(this.newValue[i])){
+      this.newValue[i] = 0;
+    }
 
-    console.log("i:",i);
-    // console.log("Old value:",this.oldValue[i]);
-
-    this.oldValue[i] = (this.newValue[i]);
-    this.newValue[i] = (event.target.valueAsNumber);
-    console.log("quantity handler:",dishid,this.newValue[i],this.oldValue[i]);
-    if(this.stockService.quantityIncreaseHandler(dishid,this.newValue[i] - this.oldValue[i])){
-      // let it increase
+    if(isNaN(this.oldValue[i])){
+      this.oldValue[i] = 0;
+    }
+    
+    this.newValue[i] = event.target.valueAsNumber;
+    
+    if(this.stockService.quantityIncreaseHandler(dishid,(this.newValue[i]||0) - this.oldValue[i]||0)){
       this.err = false;
+      if(isNaN(this.oldValue[i]) || isNaN(this.newValue[i])) {
+        this.err = true;
+        this.toastrService.warn("Quantity Should not be empty.");
+      }
     }
+    
     else {
-      // this.qty[i] = this.oldValue[i];
-      // this.maxPossible[i] = true;
       this.err = true; 
-      this.toastrService.warn("Sufficient ingredients are not available.");
+      this.toastrService.warn("Sufficient Ingredients not available");
     }
+    
+  }
+
+  isLoggedIn() {
+    return this.auth.loggedIn();
   }
 }

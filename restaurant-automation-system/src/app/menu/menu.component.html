@@ -9,8 +9,8 @@
                     <mat-grid-tile *ngFor = "let dish of dishes;let i = index" 
                                     (mouseenter)="onHover(i)"
                                     (mouseleave)="onHover(i)">                                     
-                        <mat-grid-tile-header *ngIf="onDish[i]">
-                            <button mat-button (click)="openPriceUpdateForm(i)"> <i class="material-icons">edit</i></button>
+                        <mat-grid-tile-header *ngIf="onDish[i] && isLoggedIn()">
+                            <button *ngIf="isManager()" mat-button (click)="openPriceUpdateForm(i)"> <i class="material-icons">edit</i></button>
                             <button mat-button (click)="addToCart(i)"> <i class="material-icons">add_shopping_cart</i></button>
                         </mat-grid-tile-header>
                         <!-- ngFor is a structural directive and helps to iterate over a list of items -->

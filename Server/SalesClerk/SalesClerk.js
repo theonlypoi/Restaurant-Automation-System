@@ -71,7 +71,7 @@
 
         db.none(update)
           .then(()=>{
-            res.status(200).json({"message":"New ingredients added to stock."});
+            res.status(200).json({"message":"Stock Details Updated"});
           })
           .catch(err => {
             return next(err);

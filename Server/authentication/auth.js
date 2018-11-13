@@ -52,5 +52,16 @@
         }
     };
 
-    module.exports = {tokenForUser,verifyUser,verifyManager,verifySalesClerk};
+    const verifyAdmin = (req,res,next) => {
+      if(req.decoded.roletype === 'Manager' || req.decode.roletype === 'Sales Clerk') {
+        next();
+      }
+      else {
+        var err = new Error("You are not authorized to perform this task");
+        err.status = 403;
+        return next(err);
+      }
+    };
+
+    module.exports = {tokenForUser,verifyUser,verifyManager,verifySalesClerk,verifyAdmin};
 })();

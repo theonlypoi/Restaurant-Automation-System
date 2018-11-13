@@ -1,4 +1,4 @@
-<div fxFlex class="scroll" [style.height]="height_of_div + 'px'">
+<div fxFlex class="scroll" [style.height]="height_of_div + 'px'" *ngIf="isLoggedIn()">
   <h3> Your Cart </h3>
   <hr>
   <mat-list *ngFor="let dish of shoppingCart;let i = index">

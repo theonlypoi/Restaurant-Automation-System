@@ -18,7 +18,7 @@
     router.get('/getDishDetails',common.getDishDetails);
     router.get('/getDishDetails/:category',common.getCategorizedDishDetails);
     router.get('/getCategories',common.getCategories);
-    router.get('/availableStock',auth.verifyUser,auth.verifySalesClerk,common.getDishStock);
+    router.get('/availableStock',auth.verifyUser,auth.verifyAdmin,common.getDishStock);
     router.get('/logout',auth.verifyUser,common.logout);
     
     // For Managers 
@@ -35,11 +35,11 @@
     // For SalesClerk 
     router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
     router.get('/sclerk/getStockDetails',sclerk.getStockDetails);
-    router.get('/sclerk/stockInvoiceNumber',auth.verifyUser,auth.verifySalesClerk,sclerk.getStockInvoiceNumber);
+    router.get('/sclerk/stockInvoiceNumber',auth.verifyUser,auth.verifyAdmin,sclerk.getStockInvoiceNumber);
     router.get('/sclerk/getIngredients',sclerk.getIngredients);
-    router.post('/sclerk/dishSale',auth.verifyUser,auth.verifySalesClerk,sclerk.dishSale);
-    router.post('/sclerk/ingredientPurchase',auth.verifyUser,auth.verifySalesClerk,sclerk.ingredientPurchase);
-    router.post('/sclerk/addNewStock',auth.verifyUser,auth.verifySalesClerk,sclerk.refreshStock);
+    router.post('/sclerk/dishSale',auth.verifyUser,auth.verifyAdmin,sclerk.dishSale);
+    router.post('/sclerk/ingredientPurchase',auth.verifyUser,auth.verifyAdmin,sclerk.ingredientPurchase);
+    router.post('/sclerk/updateStockDetail',auth.verifyUser,auth.verifyAdmin,sclerk.refreshStock);
 
 
     module.exports = router;
