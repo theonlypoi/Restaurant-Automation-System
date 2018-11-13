@@ -8,6 +8,7 @@ import { StockdetailComponent } from '../stockdetail/stockdetail.component';
 import { PurchasestockComponent } from '../purchasestock/purchasestock.component';
 import { AuthGuard } from '../auth.guard';
 import { IngredientfordishComponent } from '../ingredientfordish/ingredientfordish.component';
+import { ContactComponent } from '../contact/contact.component';
 
 export const routes:Routes = [
     {
@@ -44,6 +45,10 @@ export const routes:Routes = [
      path: 'ingredientfordish',
      component: IngredientfordishComponent,
      canActivate: [AuthGuard]
+    },
+    {
+     path: 'contact',
+     component: ContactComponent
     },
     {path: '',redirectTo: '/home',pathMatch: 'full'}
 ]

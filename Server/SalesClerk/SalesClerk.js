@@ -94,4 +94,15 @@
               return next(error);
           });
       }
+
+      exports.addNewIngredient = (req,res,next) => {
+        let query = "insert into ingredient(ingredientname,price,availability,threshold) values($1,$2,$3,$4)";
+        let params = [req.body.name,req.body.price,req.body.quantity,1];
+
+        common.dbConnection(query,params)
+              .then(result => {
+                res.status(200).json(result.rows);
+              })
+              .catch(err => { return next(err);})
+      }
 })();

@@ -8,7 +8,7 @@
     <button mat-menu-item [routerLink]="['/menu']"> Dish Menu </button>
     <button mat-menu-item *ngIf="isAdmin()" (click)="openDishAddForm()"> Add new Dish </button>
   </mat-menu>
-  <button mat-button> <i class="material-icons"> contacts </i>Contact </button>
+  <button mat-button [routerLink]="['/contact']"> <i class="material-icons"> contacts </i>Contact </button>
   <button mat-button> <i class="material-icons"> supervisor_account </i>About Us</button>
   <button mat-button [matMenuTriggerFor]="sclerk_menu" *ngIf="isAdmin() || isSalesClerk()">
     <i class="material-icons"> assessment </i> Inventory Management</button>
@@ -16,6 +16,7 @@
       <button mat-menu-item [routerLink]="['/stock']"> Stock Detail </button>
       <button mat-menu-item [routerLink]="['/purchaseStock']"> Ingredient Purchase </button>
       <button mat-menu-item [routerLink]="['/ingredientfordish']"> Ingredient For Dish</button>
+      <button mat-menu-item (click)="openIngredientAddForm()"> Add new Ingredient </button>
     </mat-menu>
   <button mat-button *ngIf="isAdmin()" [routerLink]="['/reports']"> <i class="material-icons"> receipt </i>Reports </button>
   <span class="flex-spacer"></span>

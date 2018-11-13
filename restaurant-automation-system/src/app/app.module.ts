@@ -45,7 +45,8 @@ import { AuthGuard } from './auth.guard';
 
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { IngredientfordishComponent } from './ingredientfordish/ingredientfordish.component';
-import { IngredientaddComponent } from './ingredientadd/ingredientadd.component'
+import { IngredientaddComponent } from './ingredientadd/ingredientadd.component';
+import { ContactComponent } from './contact/contact.component'
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { IngredientaddComponent } from './ingredientadd/ingredientadd.component'
     IngredientorderComponent,
     PurchasestockComponent,
     IngredientfordishComponent,
-    IngredientaddComponent
+    IngredientaddComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +109,8 @@ import { IngredientaddComponent } from './ingredientadd/ingredientadd.component'
     DishaddComponent,
     PriceupdateComponent,
     BillgenerationComponent,
-    IngredientorderComponent
+    IngredientorderComponent,
+    IngredientaddComponent
   ]
 })
 export class AppModule { }

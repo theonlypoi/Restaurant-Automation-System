@@ -191,4 +191,8 @@ export class StockService {
   allocateIngredients(data) {
     return this.http.post(baseUrl + 'sclerk/allocateIngredient',data);
   }
+
+  addNewIngredient(data) {
+    return this.http.post(baseUrl + 'sclerk/addIngredients',data);
+  }
 }

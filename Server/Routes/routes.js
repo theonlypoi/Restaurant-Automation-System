@@ -41,6 +41,6 @@
     router.post('/sclerk/ingredientPurchase',auth.verifyUser,auth.verifyAdmin,sclerk.ingredientPurchase);
     router.post('/sclerk/updateStockDetail',auth.verifyUser,auth.verifyAdmin,sclerk.refreshStock);
     router.post('/sclerk/allocateIngredient',auth.verifyUser,auth.verifyAdmin,sclerk.allocateIngredient);
-
+    router.post('/sclerk/addIngredients',auth.verifyUser,auth.verifyAdmin,sclerk.addNewIngredient);
     module.exports = router;
 })();

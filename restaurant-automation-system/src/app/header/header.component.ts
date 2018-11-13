@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { DishaddComponent } from '../dishadd/dishadd.component';
 import { AuthService } from '../services/auth.service';
+import { IngredientaddComponent } from '../ingredientadd/ingredientadd.component';
 
 @Component({
   selector: 'app-header',
@@ -47,6 +48,16 @@ export class HeaderComponent implements OnInit {
     dialogConfig.width = '600px';
 
     this.dialog.open(DishaddComponent,dialogConfig);
+  }
+
+  openIngredientAddForm() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.height = '400px';
+    dialogConfig.width = '400px';
+
+    this.dialog.open(IngredientaddComponent,dialogConfig);
   }
 
   logout() {
