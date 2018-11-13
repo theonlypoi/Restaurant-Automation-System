@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { DishaddComponent } from '../dishadd/dishadd.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,21 +11,21 @@ import { DishaddComponent } from '../dishadd/dishadd.component';
 })
 export class HeaderComponent implements OnInit {
 
-  isManager: boolean = true;
-  isNormalUser: boolean = true;
-  isSClerk: boolean = true;
-
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private auth:AuthService) { }
 
   ngOnInit() {
   }
 
+  isLoggedIn(): boolean {
+    return (this.auth.loggedIn());
+  }
+
   isAdmin(): boolean {
-    return (this.isNormalUser && this.isManager);
+    return (this.auth.getUserRole() === 'Manager') // || this.auth.getUserRole() === 'Sales Clerk');
   }
 
   isSalesClerk(): boolean {
-    return (this.isNormalUser && this.isSClerk);
+    return (this.auth.getUserRole() === "Sales Clerk")
   }
 
   openLoginForm() {
@@ -46,5 +47,9 @@ export class HeaderComponent implements OnInit {
     dialogConfig.width = '600px';
 
     this.dialog.open(DishaddComponent,dialogConfig);
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }

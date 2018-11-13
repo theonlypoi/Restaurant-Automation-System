@@ -22,5 +22,6 @@
     </mat-menu>
   <button mat-button *ngIf="isAdmin()" [routerLink]="['/reports']"> <i class="material-icons"> receipt </i>Reports </button>
   <span class="flex-spacer"></span>
-  <button mat-button (click)="openLoginForm()"> <i class="material-icons"> exit_to_app </i> Login </button>
+  <button mat-button (click)="openLoginForm()" *ngIf="!isLoggedIn()"> <i class="material-icons"> exit_to_app </i> Login </button>
+  <button mat-button (click)="logout()" *ngIf="isLoggedIn()"> <i class="material-icons"> exit_to_app </i> Logout </button>
 </mat-toolbar>

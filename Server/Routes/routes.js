@@ -15,10 +15,11 @@
     // For Everybody 
     router.post('/login',loginAuthenticator,common.login);
     router.get('/logout',auth.verifyUser,common.logout);
-    router.get('/getDishDetails',auth.verifyUser,common.getDishDetails);
-    router.get('/getDishDetails/:category',auth.verifyUser,common.getCategorizedDishDetails);
-    router.get('/getCategories',auth.verifyUser,common.getCategories);
+    router.get('/getDishDetails',common.getDishDetails);
+    router.get('/getDishDetails/:category',common.getCategorizedDishDetails);
+    router.get('/getCategories',common.getCategories);
     router.get('/availableStock',auth.verifyUser,auth.verifySalesClerk,common.getDishStock);
+    router.get('/logout',auth.verifyUser,common.logout);
     
     // For Managers 
     router.post('/manager/addNewDish',auth.verifyUser,auth.verifyManager,manager.addNewDish);
@@ -32,10 +33,10 @@
     router.get('/manager/expenseDetails',auth.verifyUser,auth.verifyManager,manager.monthlyExpenseDetails);
     
     // For SalesClerk 
-    router.get('/sclerk/getInvoiceNumber',auth.verifyUser,auth.verifySalesClerk,sclerk.getInvoiceNumber);
-    router.get('/sclerk/getStockDetails',auth.verifyUser,auth.verifySalesClerk,sclerk.getStockDetails);
+    router.get('/sclerk/getInvoiceNumber',sclerk.getInvoiceNumber);
+    router.get('/sclerk/getStockDetails',sclerk.getStockDetails);
     router.get('/sclerk/stockInvoiceNumber',auth.verifyUser,auth.verifySalesClerk,sclerk.getStockInvoiceNumber);
-    router.get('/sclerk/getIngredients',auth.verifyUser,auth.verifySalesClerk,sclerk.getIngredients);
+    router.get('/sclerk/getIngredients',sclerk.getIngredients);
     router.post('/sclerk/dishSale',auth.verifyUser,auth.verifySalesClerk,sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',auth.verifyUser,auth.verifySalesClerk,sclerk.ingredientPurchase);
     router.post('/sclerk/addNewStock',auth.verifyUser,auth.verifySalesClerk,sclerk.refreshStock);

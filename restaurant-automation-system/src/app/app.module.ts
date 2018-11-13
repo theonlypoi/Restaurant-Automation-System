@@ -14,7 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -41,6 +41,9 @@ import { StockdetailComponent } from './stockdetail/stockdetail.component';
 import { ModifiedcurrencyPipe } from './modifiedcurrency.pipe';
 import { IngredientorderComponent } from './ingredientorder/ingredientorder.component';
 import { PurchasestockComponent } from './purchasestock/purchasestock.component';
+import { AuthGuard } from './auth.guard';
+
+import { TokenInterceptorService } from './services/token-interceptor.service'
 
 @NgModule({
   declarations: [
@@ -87,7 +90,12 @@ import { PurchasestockComponent } from './purchasestock/purchasestock.component'
   ],
   exports:[],
   providers: [
-    { provide: 'baseUrl',useValue: baseUrl}
+    { provide: 'baseUrl',useValue: baseUrl},
+    AuthGuard,
+    { provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [

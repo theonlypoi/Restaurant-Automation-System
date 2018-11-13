@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { Login } from '../models/login';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +32,8 @@ export class LoginComponent implements OnInit {
   
   @ViewChild('lform') loginFormDirective;
 
-  constructor(private fb:FormBuilder) { 
+  constructor(private fb:FormBuilder,private loginService: LoginService,private auth:AuthService,
+              private router:Router,public dialogRef:MatDialogRef<LoginComponent>) { 
     this.createForm();
   }
 
@@ -38,7 +43,7 @@ export class LoginComponent implements OnInit {
   createForm() {
     this.loginForm= this.fb.group({
       username: ['',[Validators.required]],
-      password: ['',[Validators.required]]
+      userpassword: ['',[Validators.required]]
     });
 
     this.loginForm.valueChanges
@@ -68,10 +73,18 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.loginData = this.loginForm.value;
-    // console.log(this.loginData);
+    this.auth.logout();
+
+    this.loginService.login(this.loginData)
+                     .subscribe(response => {
+                        localStorage.setItem("token",response['token']);
+                        localStorage.setItem("roletype",response['roletype']);
+                        this.dialogRef.close();
+                        this.router.navigate(['/home']);
+                     })
     this.loginForm.reset({
       username: '',
-      password: ''
+      userpassword: ''
     });
     this.loginFormDirective.reset();
   }
