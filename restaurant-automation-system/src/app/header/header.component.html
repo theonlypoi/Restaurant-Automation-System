@@ -14,11 +14,8 @@
     <i class="material-icons"> assessment </i> Inventory Management</button>
     <mat-menu #sclerk_menu="matMenu"> 
       <button mat-menu-item [routerLink]="['/stock']"> Stock Detail </button>
-      <!-- <button mat-menu-item> Order Ingredient </button> -->
       <button mat-menu-item [routerLink]="['/purchaseStock']"> Ingredient Purchase </button>
-      <!-- <button mat-menu-item> Ingredient For Dish</button> -->
-      <!-- <button mat-menu-item> Generate Bill </button> -->
-      <!-- <button mat-menu-item> Item Sale </button> -->
+      <button mat-menu-item [routerLink]="['/ingredientfordish']"> Ingredient For Dish</button>
     </mat-menu>
   <button mat-button *ngIf="isAdmin()" [routerLink]="['/reports']"> <i class="material-icons"> receipt </i>Reports </button>
   <span class="flex-spacer"></span>

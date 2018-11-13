@@ -77,4 +77,21 @@
             return next(err);
           });
     }
+
+    exports.allocateIngredient = (req,res,next) => {
+      const cs = new pgp.helpers.ColumnSet(['itemid', 'ingredientid','quantityrequired'], {table: 'ingredientforitem'}); 
+      // generating a multi-row insert query:
+      const query = pgp.helpers.insert(req.body, cs);
+
+      // executing the query:
+      db.none(query)
+          .then(data => {
+              res.status(200).json({
+                "message":"Allocated Ingredients for the dish."
+              })
+          })
+          .catch(error => {
+              return next(error);
+          });
+      }
 })();

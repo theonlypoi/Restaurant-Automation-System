@@ -5,6 +5,7 @@ import { Login } from '../models/login';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from '../services/toastr.service';
 
 @Component({
   selector: 'app-login',
@@ -33,7 +34,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('lform') loginFormDirective;
 
   constructor(private fb:FormBuilder,private loginService: LoginService,private auth:AuthService,
-              private router:Router,public dialogRef:MatDialogRef<LoginComponent>) { 
+              private router:Router,public dialogRef:MatDialogRef<LoginComponent>,
+              private toastr:ToastrService) { 
     this.createForm();
   }
 
@@ -81,7 +83,10 @@ export class LoginComponent implements OnInit {
                         localStorage.setItem("roletype",response['roletype']);
                         this.dialogRef.close();
                         this.router.navigate(['/home']);
-                     })
+                     },
+                     err => {
+                      this.toastr.error("Invalid UserName and/or Password.")
+                     });
     this.loginForm.reset({
       username: '',
       userpassword: ''

@@ -68,9 +68,12 @@ export class ShoppingcartComponent implements OnInit{
   }
 
   removeFromCart(i: number): void {
+    this.stockService.cartRemoval(this.shoppingCart[i].itemid,this.qty[i]);
     this.shoppingCart.splice(i,1);
     this.qty.splice(i,1);
     this.maxPossible.splice(i,1);
+
+    // add ingredients 
   }
 
   constructShoppingCart() {

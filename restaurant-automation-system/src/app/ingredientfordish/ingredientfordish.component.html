@@ -1,0 +1,29 @@
+<form novalidate [formGroup]="ingredientForDishForm" class="space">
+<h5> Date: {{ date | date}} </h5>
+<div>
+    <div formArrayName="dishes" *ngFor="let d of ingredientForDishForm.get('dishes').controls;let i=index">
+    <div [formGroupName]="i">
+        <mat-form-field>
+          <mat-select name="item" formControlName="itemid" placeholder="choose item" required>
+            <mat-option *ngFor="let dish of allDishes" [value]="dish.itemid"> 
+              {{ dish.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select name="ingredient" formControlName="ingredientid" placeholder="choose ingredient" required>
+            <mat-option *ngFor="let ing of allIngredients" [value]="ing.ingredientid">
+              {{ ing.ingredientname }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" formControlName="quantityrequired" matInput min = "1" placeholder="quantity required" required>
+        </mat-form-field>
+    </div>
+  </div>
+  <div>
+    <button mat-button color="primary" (click)="addMoreIngredient()">Add More</button>
+    <button mat-button [disabled]="ingredientForDishForm.invalid" (click)="Submit()"> Allocate Ingredient </button>
+  </div>
+</div>

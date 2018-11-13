@@ -40,7 +40,7 @@
     router.post('/sclerk/dishSale',auth.verifyUser,auth.verifyAdmin,sclerk.dishSale);
     router.post('/sclerk/ingredientPurchase',auth.verifyUser,auth.verifyAdmin,sclerk.ingredientPurchase);
     router.post('/sclerk/updateStockDetail',auth.verifyUser,auth.verifyAdmin,sclerk.refreshStock);
-
+    router.post('/sclerk/allocateIngredient',auth.verifyUser,auth.verifyAdmin,sclerk.allocateIngredient);
 
     module.exports = router;
 })();

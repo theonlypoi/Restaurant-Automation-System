@@ -43,7 +43,7 @@ export class StockdetailComponent implements OnInit {
   }
 
   getBelowThresholdStock(stock) {
-    this.belowThresholdStock = new MatTableDataSource(stock.filter(s => s.availability < s.threshold));
+    this.belowThresholdStock = new MatTableDataSource(stock.filter(s => s.availability <= s.threshold));
     this.belowingLen = this.belowThresholdStock.filteredData.length;
     // console.log(this.belowThresholdStock);
   }

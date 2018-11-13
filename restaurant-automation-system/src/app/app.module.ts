@@ -43,7 +43,9 @@ import { IngredientorderComponent } from './ingredientorder/ingredientorder.comp
 import { PurchasestockComponent } from './purchasestock/purchasestock.component';
 import { AuthGuard } from './auth.guard';
 
-import { TokenInterceptorService } from './services/token-interceptor.service'
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { IngredientfordishComponent } from './ingredientfordish/ingredientfordish.component';
+import { IngredientaddComponent } from './ingredientadd/ingredientadd.component'
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { TokenInterceptorService } from './services/token-interceptor.service'
     StockdetailComponent,
     ModifiedcurrencyPipe,
     IngredientorderComponent,
-    PurchasestockComponent
+    PurchasestockComponent,
+    IngredientfordishComponent,
+    IngredientaddComponent
   ],
   imports: [
     BrowserModule,

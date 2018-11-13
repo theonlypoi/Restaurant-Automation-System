@@ -55,6 +55,16 @@ export class StockService {
     // console.log("Initial:",this.ingredients);
   }
 
+  cartRemoval(id:number,quantity: number) {
+    let dishRequirements = this.requirements.filter(require => require.itemid === id);
+    for(const elem of dishRequirements){
+      let index = this.ingredients.findIndex(ing => ing.ingredientid === elem.ingredientid);
+      // console.log(this.ingredients[index]);
+      this.ingredients[index].availability += (elem.requirement * quantity);
+      // console.log(this.ingredients[index]);
+    }
+  }
+
   quantityIncreaseHandler(dishid:number,quantity:number) {
     // check whether it is possible to increase the quantity or not 
      // console.log("Quantity:",quantity);
@@ -102,7 +112,7 @@ export class StockService {
       return status;
   }
 
-  dishPrepPossible(requirements,id: number,ingredients) {
+  dishPrepPossible(requirements:Requirement[],id: number,ingredients) {
     
     let status = false;
     this.requirements = requirements;
@@ -110,6 +120,7 @@ export class StockService {
     // console.log(this.ingredients);
 
     // console.log(this.requirements);
+    // requirements show the quantity required for different dishes.
 
     // extract out the ingredients required for the dish
     this.ingredientForDish = []; 
@@ -120,6 +131,7 @@ export class StockService {
         this.ingredientForDish.push(elem);
       }
     }
+    // console.log(this.ingredientForDish);
     // If no ingredient allocated then dish should not be prepared
     if(this.ingredientForDish.length === 0){
       this.obj.status = false;
@@ -130,7 +142,9 @@ export class StockService {
     // Find out whether all ingredients are above threshold
     for(const elem of this.ingredientForDish){
       let ing = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
+      
       if(ing.availability - elem.requirement < elem.threshold) {
+        
         status = false;
         break;
       } else {
@@ -148,7 +162,7 @@ export class StockService {
       this.obj.possibleDishes = this.findMaxLimit();
 
       this.refreshIngredientQuantity(id);
-      
+      // console.log("Initial:");
       // for(const elem of this.ingredientForDish){
       //   let ing = this.ingredients.find(ing => ing.ingredientid === elem.ingredientid);
       //   console.log("Name:",elem.ingredientname,"Quantity",ing.availability);
@@ -172,5 +186,9 @@ export class StockService {
 
   updateStockDetails() {
     return this.http.post(baseUrl + 'sclerk/updateStockDetail',this.ingredients);
+  }
+
+  allocateIngredients(data) {
+    return this.http.post(baseUrl + 'sclerk/allocateIngredient',data);
   }
 }
