@@ -53,7 +53,8 @@
     };
 
     const verifyAdmin = (req,res,next) => {
-      if(req.decoded.roletype === 'Manager' || req.decode.roletype === 'Sales Clerk') {
+      console.log(req.decoded);
+      if(req.decoded.roletype === 'Manager' || req.decoded.roletype === 'Sales Clerk') {
         next();
       }
       else {

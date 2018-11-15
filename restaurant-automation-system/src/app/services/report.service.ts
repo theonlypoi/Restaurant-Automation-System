@@ -27,4 +27,8 @@ export class ReportService {
     }
     return this.http.post(baseUrl + 'manager/getCustomSalesReport',this.dateRange);
   }
+
+  getMonthlyExpenseDetails() {
+    return this.http.get<any>(baseUrl + 'manager/expenseDetails');
+  }
 }

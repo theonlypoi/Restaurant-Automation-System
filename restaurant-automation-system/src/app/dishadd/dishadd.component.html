@@ -13,7 +13,7 @@
       <mat-form-field> 
         <mat-select placeholder="Category" required formControlName="category"> 
           <mat-option> None </mat-option>
-          <mat-option *ngFor="let catg of categories">
+          <mat-option *ngFor="let catg of categories" [value]="catg.categoryid">
             {{ catg.categoryname }}
           </mat-option>
         </mat-select>

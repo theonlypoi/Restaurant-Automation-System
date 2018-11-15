@@ -40,7 +40,7 @@ export class DishService {
   }
 
   getCategories() {
-    return this.http.get(baseUrl + 'getCategories')
+    return this.http.get<any>(baseUrl + 'getCategories')
                     .pipe(catchError(this.errorHandler));
   }
 

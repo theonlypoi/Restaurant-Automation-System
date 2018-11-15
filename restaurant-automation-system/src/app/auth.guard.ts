@@ -17,6 +17,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     else {
+      this.router.navigate(['/home']);
       this.toastrService.warn("You are not authenticated");
       return false;
     }

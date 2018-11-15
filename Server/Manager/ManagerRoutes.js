@@ -75,7 +75,7 @@
      };
 
      exports.monthlyExpenseDetails = function(req,res,next) {
-        let query = "select * from monthlyingredientpurchase()";
+        let query = "select * from getmonthlyexpensereport()";
         common.dbConnection(query)
                 .then(result => {
                     res.status(200).json(result.rows);

@@ -99,7 +99,7 @@ export class ShoppingcartComponent implements OnInit{
                       this.getInvoiceNumber();
                     },
                     error => {
-                      this.toastrService.error(error);
+                      this.toastrService.error("Some error occured.");
                     });
   }
 

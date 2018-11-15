@@ -92,4 +92,39 @@
                 showFirstLastButtons>
           </mat-paginator>
       </mat-tab>
+      <mat-tab label="Monthly Expense"> 
+        <table mat-table  #expenseSort="matSort" [dataSource]="expenseDataSource" matSort>
+          <ng-container matColumnDef="purchasedate"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{ element.purchasedate | date }} </td>
+          </ng-container>
+          <ng-container matColumnDef="vendorname"> 
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Vendor Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.vendorname }} </td>
+          </ng-container>
+          <ng-container matColumnDef="ingredientname"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Ingredient Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.ingredientname }} </td>
+          </ng-container>
+          <ng-container matColumnDef="quantity"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Purchase </th>
+            <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+          </ng-container>
+          <ng-container matColumnDef="totalcost"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cost </th>
+            <td mat-cell *matCellDef="let element"> {{ element.totalcost }} </td>
+          </ng-container>
+          <ng-container matColumnDef="invoice"> 
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Invoice number </th>
+            <td mat-cell *matCellDef="let element"> {{ element.invoice }} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="expenseColumns"></tr>
+          <tr mat-row *matRowDef="let myRowData; columns: expenseColumns"></tr>
+        </table>
+          <mat-paginator #expensePaginator="matPaginator" [length]="expenseReportLen"
+                [pageSize]="5"
+                [pageSizeOptions]="[5, 10, 25, 100]"
+                showFirstLastButtons>
+          </mat-paginator>
+      </mat-tab>
 </mat-tab-group>
