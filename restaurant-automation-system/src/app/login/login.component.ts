@@ -82,6 +82,7 @@ export class LoginComponent implements OnInit {
                         localStorage.setItem("token",response['token']);
                         localStorage.setItem("roletype",response['roletype']);
                         this.dialogRef.close();
+                        this.toastr.success("Logged in successfully");
                         this.router.navigate(['/home']);
                      },
                      err => {
